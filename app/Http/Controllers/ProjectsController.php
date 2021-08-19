@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Project;
 use Illuminate\Http\Request;
+use League\CommonMark\Extension\Attributes\Node\Attributes;
 
 class ProjectsController extends Controller
 {
@@ -23,8 +24,10 @@ class ProjectsController extends Controller
     {
         $attributes = request()->validate([
             'title' => 'required',
-            'description' => 'required'
+            'description' => 'required',
         ]);
+
+        $attributes['owner_id'] = auth()->id();
 
         Project::create($attributes);
 

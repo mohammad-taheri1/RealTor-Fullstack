@@ -54,4 +54,12 @@ class ProjectsTest extends TestCase
 
         $this->post('/projects', $attributes)->assertSessionHasErrors('description');
     }
+
+    /** @test */
+    public function only_authenticated_users_can_create_projects()
+    {
+        $attributes = Project::factory()->raw();
+
+        $this->post('/projects', $attributes)->assertRedirect('login');
+    }
 }
