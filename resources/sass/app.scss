@@ -1,8 +1,6 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
-// Fonts
-@import url('https://fonts.googleapis.com/css?family=Nunito');
 
 // Variables
 @import 'variables';
@@ -10,4 +8,10 @@
 // Bootstrap
 @import '~bootstrap/scss/bootstrap';
 
+body{
+    background-color: #F5F6F9 !important;
+}
 
+.shadow {
+    box-shadow: 0 0 5px 0 rgba( 0, 0, 0, 0.08) !important;
+}
