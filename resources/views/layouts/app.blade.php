@@ -22,10 +22,14 @@
 <body>
     <div id="app">
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
-            <div class="container ">
-                <a class="navbar-brand" href="{{ url('/') }}">
-                    {{ config('app.name', 'Laravel') }}
-                </a>
+            <div class="container-fluid">
+                <h1>
+                    <a class="navbar-brand" href="{{ url('/') }}">
+                        <img src="/images/logo.svg" alt="Birdboard">
+                        {{-- {{ config('app.name', 'Laravel') }} --}}
+                    </a>
+                </h1>
+
 
                 {{-- <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="{{ __('Toggle navigation') }}">
                     <span class="navbar-toggler-icon"></span>
@@ -72,9 +76,9 @@
             </div>
         </nav>
 
-        <main class="container py-4">
+        <section class="container-fluid px-md-5 pt-4">
             @yield('content')
-        </main>
+        </section>
     </div>
 </body>
 </html>

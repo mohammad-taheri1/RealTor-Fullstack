@@ -42475,6 +42475,24 @@ body {
   box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.08) !important;
 }
 
+.button-blue {
+  background-color: #47cdff;
+  color: #fff !important;
+  text-decoration: none !important;
+  border-radius: 0.5rem;
+  box-shadow: 0 2px 7px 0 #b0eaff;
+  font-size: 14px;
+}
+
+.border-blue-custom {
+  border-radius: 1px;
+  border-color: #8ae2fe;
+}
+
+.no-decoration {
+  text-decoration: none !important;
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;
