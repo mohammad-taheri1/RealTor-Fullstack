@@ -5,13 +5,15 @@
             <a href="/projects/create">New Project</a>
         </div>
 
-        <div class="flex">
+        <div class="row">
             @forelse ($projects as $project)
-                <div class="bg-white mr-4 p-4 rounded shadow w-1/3" style="height: 200px">
-                    <h3 class="font-normal text-xl mb-4  py-6"> {{ $project->title }}</h3>
+            <div class="col-md-4 px-3">
+                <div class="bg-white p-4 rounded shadow" style="height: 300px">
+                    <h3 class="font-normal text-xl py-6"> {{ $project->title }}</h3>
 
                     <div class="text-muted"> {{ Str::limit($project->description, 100) }} </div>
                 </div>
+            </div>
             @empty
                 <div>No Projects yet.</div>
             @endforelse
