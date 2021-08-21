@@ -42493,6 +42493,19 @@ body {
   text-decoration: none !important;
 }
 
+.my-card {
+  border-radius: 0.75rem;
+  --tw-bg-opacity: 1;
+  background-color: rgba(255, 255, 255, var(--tw-bg-opacity));
+  padding: 1rem;
+  --tw-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.1), 0 1px 2px 0 rgba(0, 0, 0, 0.06);
+  box-shadow: var(--tw-ring-offset-shadow, 0 0 #0000), var(--tw-ring-shadow, 0 0 #0000), var(--tw-shadow);
+  background-color: #fff;
+  box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+  padding: 1.5rem;
+  box-shadow: 0 0 5px 0 rgba(0, 0, 0, 0.08);
+}
+
 @media (min-width: 640px){
   .sm\:container{
     width: 100%;

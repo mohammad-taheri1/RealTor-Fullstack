@@ -33,3 +33,7 @@ body{
 .no-decoration {
     text-decoration: none !important;
 }
+
+.my-card {
+   @apply bg-white p-4 rounded-xl shadow
+}
