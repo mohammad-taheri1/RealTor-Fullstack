@@ -2,7 +2,7 @@
 
 @section('content')
     <header class="d-flex items-center mb-3 py-4">
-        <div class="d-flex justify-between w-full items-center">
+        <div class="d-flex justify-between w-full items-end">
             <h2 class="text-muted text-sm font-normal">My Projects</h2>
 
             <a href="/projects/create" class="button-blue py-2 px-4">New Project</a>
