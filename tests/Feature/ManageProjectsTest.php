@@ -21,13 +21,12 @@ class ManageProjectsTest extends TestCase
         $this->get('/projects/create',)->assertRedirect('login');
         $this->get($project->path())->assertRedirect('login');
         $this->post('/projects', $project->toArray())->assertRedirect('login');
-
     }
 
     /** @test */
     public function a_user_can_create_a_project()
     {
-        $this->withoutExceptionHandling();
+        // $this->withoutExceptionHandling();
 
         $this->signIn();
 
@@ -38,11 +37,14 @@ class ManageProjectsTest extends TestCase
             'description' => $this->faker->paragraph,
         ];
 
-       $this->post('/projects', $attributes)->assertRedirect('/projects');
+        $response = $this->post('/projects', $attributes);
 
-       $this->assertDatabaseHas('projects', $attributes);
+        $response->assertRedirect(Project::where($attributes)->first()->path());
 
-       $this->get('/projects')->assertSee($attributes['title']);
+
+        $this->assertDatabaseHas('projects', $attributes);
+
+        $this->get('/projects')->assertSee($attributes['title']);
     }
 
     /** @test */
@@ -56,7 +58,7 @@ class ManageProjectsTest extends TestCase
 
         $this->get($project->path())
             ->assertSee($project->title)
-            ->assertSee(substr($project->description, 0 , 60));
+            ->assertSee(substr($project->description, 0, 60));
     }
 
     /** @test */
