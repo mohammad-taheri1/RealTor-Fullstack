@@ -24,7 +24,7 @@
         <nav class="navbar navbar-expand-md navbar-light bg-white shadow-sm">
             <div class="container-fluid">
                 <h1>
-                    <a class="navbar-brand" href="{{ url('/') }}">
+                    <a class="navbar-brand" href="{{ url('/projects') }}">
                         <img src="/images/logo.svg" alt="Birdboard">
                         {{-- {{ config('app.name', 'Laravel') }} --}}
                     </a>
