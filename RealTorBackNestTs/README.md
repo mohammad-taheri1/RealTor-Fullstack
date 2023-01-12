@@ -4,6 +4,10 @@ Usefull packages in this project:
     @prisma/client
     class-validator
     class-transformer
+    bcryptjs
+    @types/bcryptjs
+    jsonwebtoken
+    @types/jsonwebtoken
  
  ## Initialize Prisma on project
 
