@@ -21,7 +21,7 @@ export class AuthService {
   constructor(private readonly prismaService: PrismaService) {}
 
   // 1
-  async signup({ email, password, name, phone }: SignupParams) {
+  async signup({ email, password, name, phone }: SignupParams, userType: UserType) {
     //
     const isUserExists = await this.prismaService.user.findUnique({
       where: {
@@ -41,7 +41,7 @@ export class AuthService {
         name,
         phone,
         password: hashedPassword,
-        user_type: UserType.BUYER,
+        user_type: userType,
       },
     });
 
@@ -82,5 +82,11 @@ export class AuthService {
         expiresIn: 36000,
       },
     );
+  }
+
+  generatProductKey(email: string, userType: UserType) {
+    const string = `${email}-${userType}-${process.env.PRODUCT_KEY_SECRET}`;
+
+    return bcrypt.hash(string, 10);
   }
 }
