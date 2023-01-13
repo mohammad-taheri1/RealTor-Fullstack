@@ -1,6 +1,7 @@
 import { Injectable, NotFoundException } from '@nestjs/common';
 import { PropertyType } from '@prisma/client';
 import { PrismaService } from 'src/prisma/prisma.service';
+import { UserInfo } from 'src/types/commonTypes.types';
 import { HomeResponseDto } from './dto/home.dto';
 
 interface GetHomesParam {
@@ -176,7 +177,7 @@ export class HomeService {
       },
     });
 
-    return "Dome Deleted successfully"
+    return 'Home Deleted successfully';
   }
 
   async getRealtorByHomeId(id: number) {
@@ -201,5 +202,36 @@ export class HomeService {
     }
 
     return homeData.realtor;
+  }
+
+  async inquire(buyer: UserInfo, homeId: number, message: string) {
+    const realtor = await this.getRealtorByHomeId(homeId);
+
+    return this.prismaService.message.create({
+      data: {
+        realtor_id: realtor.id,
+        buyer_id: buyer.id,
+        home_id: homeId,
+        message,
+      },
+    });
+  }
+
+  getMessagesByHome(homeId: number) {
+    return this.prismaService.message.findMany({
+      where: {
+        home_id: homeId,
+      },
+      select: {
+        message: true,
+        buyer: {
+          select: {
+            name: true,
+            phone: true,
+            email: true,
+          },
+        },
+      },
+    });
   }
 }
