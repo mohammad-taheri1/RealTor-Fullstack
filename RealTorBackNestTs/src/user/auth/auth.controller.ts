@@ -11,7 +11,8 @@ import { UserType } from '@prisma/client';
 import { GenerateProductKeyDto, SigninDto, SignupDto } from '../dtos/auth.dto';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcryptjs';
-import { User, UserInfo } from '../decorators/user.decorator';
+import { User } from '../../decorators/user.decorator';
+import { UserInfo } from 'src/types/commonTypes.types';
 
 @Controller('auth')
 export class AuthController {
