@@ -1,5 +1,5 @@
-import React, {useEffect, useState} from 'react';
-import axios, {AxiosResponse} from "axios";
+import {useEffect, useState} from 'react';
+import axios from "axios";
 import HomesPage from "./pages/homes.page";
 import {IHomeDto} from "./types/home.types";
 
@@ -15,7 +15,7 @@ const App = () => {
   useEffect(() => {
     axios.get(`${baseURL}/home`)
         .then((res: GetHomesResponse) => setHomes(res.data))
-  }, [])
+  }, [baseURL])
 
   return (
       <div className="container">
