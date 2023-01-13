@@ -1,5 +1,6 @@
 import {
   Controller,
+  Get,
   Post,
   Body,
   Param,
@@ -10,6 +11,7 @@ import { UserType } from '@prisma/client';
 import { GenerateProductKeyDto, SigninDto, SignupDto } from '../dtos/auth.dto';
 import { AuthService } from './auth.service';
 import * as bcrypt from 'bcryptjs';
+import { User, UserInfo } from '../decorators/user.decorator';
 
 @Controller('auth')
 export class AuthController {
@@ -48,5 +50,13 @@ export class AuthController {
   @Post('/key')
   generateProductKey(@Body() { userType, email }: GenerateProductKeyDto) {
     return this.authService.generatProductKey(email, userType);
+  }
+
+  @Get('/me')
+  me(@User() user: UserInfo) {
+    if (!user) {
+      throw new UnauthorizedException('You are not authenticated');
+    }
+    return user;
   }
 }
