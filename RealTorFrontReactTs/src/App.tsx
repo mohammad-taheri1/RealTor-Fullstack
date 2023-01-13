@@ -1,26 +1,28 @@
-import React from 'react';
-import logo from './logo.svg';
-import './App.css';
+import React, {useEffect, useState} from 'react';
+import axios, {AxiosResponse} from "axios";
+import HomesPage from "./pages/homes.page";
+import {IHomeDto} from "./types/home.types";
 
-function App() {
+const App = () => {
+  const baseURL = process.env.REACT_APP_BASE_URL || ""
+
+  const [homes, setHomes] = useState<IHomeDto[]>([]);
+
+  interface GetHomesResponse {
+    data: IHomeDto[];
+  }
+
+  useEffect(() => {
+    axios.get(`${baseURL}/home`)
+        .then((res: GetHomesResponse) => setHomes(res.data))
+  }, [])
+
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.tsx</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
-    </div>
+      <div className="container">
+        <h3 className="p-3 text-white bg-info">Welcome To RealTor App</h3>
+        {homes.length > 0 && <HomesPage homes={homes}/>}
+      </div>
   );
-}
+};
 
 export default App;
