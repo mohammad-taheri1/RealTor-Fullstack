@@ -42,6 +42,14 @@ describe('HomeService', () => {
       propertyType: PropertyType.RESIDENTIAL,
     };
 
+    it('should be defined', () => {
+      expect(service.getHomes).toBeDefined();
+    });
+
+    it('should be a function', () => {
+      expect(typeof service.getHomes).toBe('function');
+    });
+
     it('should call prisma home.findMany with correct params', async () => {
       const mockPrismaFindManyHomes = jest.fn().mockReturnValue(mockGetHomes);
 
