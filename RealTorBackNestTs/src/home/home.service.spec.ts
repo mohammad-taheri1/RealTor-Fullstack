@@ -8,7 +8,7 @@ import {
   mockCreateHomeResponse,
   mockCreateManyImagesResponse,
   mockCreateManyImagesCallWithObject,
-} from '../mock/home.mock';
+} from '../mock/homeService.mock';
 import { PropertyType } from '@prisma/client';
 import { NotFoundException } from '@nestjs/common';
 

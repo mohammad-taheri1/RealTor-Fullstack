@@ -132,9 +132,8 @@ export const mockCreateHomeResponse = {
   city: 'Shiraz',
   landSize: 350,
   price: 52000,
-  propertyType: PropertyType.RESIDENTIAL,
   image: 'src1',
-  images: [{ url: 'src1' }, { url: 'src2' }, { url: 'src3' }],
+  propertyType: PropertyType.RESIDENTIAL,
 };
 
 export const mockCreateHomeParams = {
