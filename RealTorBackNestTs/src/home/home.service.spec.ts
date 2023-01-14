@@ -1,7 +1,14 @@
 import { Test, TestingModule } from '@nestjs/testing';
 import { PrismaService } from 'src/prisma/prisma.service';
 import { homeSelect, HomeService } from './home.service';
-import { mockGetHomes } from '../mock/home.mock';
+import {
+  mockCreateHomeCallWithObject,
+  mockCreateHomeParams,
+  mockGetHomesResponse,
+  mockCreateHomeResponse,
+  mockCreateManyImagesResponse,
+  mockCreateManyImagesCallWithObject,
+} from '../mock/home.mock';
 import { PropertyType } from '@prisma/client';
 import { NotFoundException } from '@nestjs/common';
 
@@ -17,7 +24,13 @@ describe('HomeService', () => {
           provide: PrismaService,
           useValue: {
             home: {
-              findMany: jest.fn().mockReturnValue(mockGetHomes),
+              findMany: jest.fn().mockReturnValue(mockGetHomesResponse),
+              create: jest.fn().mockReturnValue(mockCreateHomeResponse),
+            },
+            image: {
+              createMany: jest
+                .fn()
+                .mockReturnValue(mockCreateManyImagesResponse),
             },
           },
         },
@@ -51,7 +64,9 @@ describe('HomeService', () => {
     });
 
     it('should call prisma home.findMany with correct params', async () => {
-      const mockPrismaFindManyHomes = jest.fn().mockReturnValue(mockGetHomes);
+      const mockPrismaFindManyHomes = jest
+        .fn()
+        .mockReturnValue(mockGetHomesResponse);
 
       jest
         .spyOn(prismaService.home, 'findMany')
@@ -82,6 +97,44 @@ describe('HomeService', () => {
 
       await expect(service.getHomes(filters)).rejects.toThrowError(
         NotFoundException,
+      );
+    });
+  });
+
+  describe('createHome', () => {
+    it('should be defined', () => {
+      expect(service.createHome).toBeDefined();
+    });
+
+    it('should be a function', () => {
+      expect(typeof service.createHome).toBe('function');
+    });
+
+    it('should call prisma home.create with the correct payload', async () => {
+      const mockCreateHome = jest.fn().mockReturnValue(mockCreateHomeResponse);
+
+      jest
+        .spyOn(prismaService.home, 'create')
+        .mockImplementation(mockCreateHome);
+
+      await service.createHome(mockCreateHomeParams, 5);
+
+      expect(mockCreateHome).toBeCalledWith(mockCreateHomeCallWithObject);
+    });
+
+    it('should call prisma image.createMany with the correct payload', async () => {
+      const mockCreateManyImage = jest
+        .fn()
+        .mockReturnValue(mockCreateManyImagesResponse);
+
+      jest
+        .spyOn(prismaService.image, 'createMany')
+        .mockImplementation(mockCreateManyImage);
+
+      await service.createHome(mockCreateHomeParams, 5);
+
+      expect(mockCreateManyImage).toBeCalledWith(
+        mockCreateManyImagesCallWithObject,
       );
     });
   });
